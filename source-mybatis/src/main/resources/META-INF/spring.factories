@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+join.injector.MPJSqlInjector,\
+com.xiao.mybatis.MybatisPlusConfig,\
+com.xiao.mybatis.plus.MyMetaObjectHandler
+

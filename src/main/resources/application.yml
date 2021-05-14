@@ -1,0 +1,91 @@
+server:
+  port: 10112
+
+spring:
+  #数据库连接
+  datasource:
+#    url: jdbc:mysql://localhost:3306/cloud?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&rewriteBatchedStatements=true&useSSL=false&serverTimezone=UTC
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://localhost:3306/cloud?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&rewriteBatchedStatements=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    hikari:
+      # 最小空闲连接数
+      minimum-idle: 5
+      # 空闲连接最大存活时间, 默认600000
+      idle-timeout: 180000
+      # 连接池最大连接数, 默认是10
+      maximum-pool-size: 20
+      ## 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+      auto-commit: true
+      ## 连接池母子
+      pool-name: MyHikariCP
+      ## 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      ## 数据库连接超时时间,默认30秒，即30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 10.10.10.89:8847
+#      config:
+#        server-addr: 10.10.10.89:8847
+
+# mybatis 扫描xml 的位置
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#feign: #开启熔断
+#feign:
+#  httpclient:
+#    enabled: false
+#  okhttp:
+#    enabled: true
+#  hystrix:
+#    enabled: true
+#  compression:
+#    request:
+#      enabled: true
+#      mime-types: text/xml,application/xml,application/json
+#      min-request-size: 2048
+#    response:
+#      enabled: true
+
+# 分布式事物
+#tx-lcn:
+#  client:
+#    manager-address: 127.0.0.1:8070
+#  ribbon:
+#    loadbalancer:
+#      dtx:
+#        enabled: true
+#  logger:
+#    enabled: true
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    jdbc-url: jdbc:mysql://10.10.60.14:3306/cloud?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC
+#    username: hlife
+#    password: 123456
+
+# swagger 说明
+ky-swagger:
+    enabled: true
+    title: 膳食
+    description: 膳食管理
+    version: 1.0
+    contact:
+      name: jing
+
+ky:
+  elasticsearch:
+    es-url: http://10.10.60.233:9200
+#    pool:
+#      - clusterName: elasticsearch
+#        nodes:
+#          - name: JINGSHAN
+#            ip: 127.0.0.1
+#            port: 9200
